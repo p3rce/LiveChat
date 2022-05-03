@@ -55,6 +55,7 @@ if(!empty($fname) && !empty($lname) && !empty($email) && !empty($password)) {
 
                                 $_SESSION['unique_id'] = $row['unique_id']; // Using this session we used the user unique id we created
                                 
+                                echo "success";
                             }
 
                         } else {
