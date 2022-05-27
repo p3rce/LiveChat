@@ -38,7 +38,7 @@ searchBar.onkeyup = ()=>{
 //Run every 500ms
 setInterval(()=>{
     let xhr = new XMLHttpRequest(); //Creating a XML object
-    xhr.open("POST", "php/users.php", true);
+    xhr.open("GET", "php/users.php", true);
     xhr.onload = ()=>{
         if(xhr.readyState === XMLHttpRequest.DONE) {
             if(xhr.status === 200) {
