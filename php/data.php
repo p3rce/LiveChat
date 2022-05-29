@@ -16,17 +16,24 @@ while($row = mysqli_fetch_assoc($sql)) {
         $result = "No message available";
     }
 
+    //Trimming message if the word count is greater than 28
     (strlen($result) > 28) ? $msg = substr($result, 0, 28).'...' : $msg = $result;
+
+    //Adding the You: Text before msg if the current user sent the last msg
+    ($outgoing_id == $row2['outgoing_msg_id']) ? $you = "You: " : $you = "";
+
+    //Check if user is online or offline
+    ($row['status'] == "Offline now") ? $offline = "offline" : $offline = "";
 
     $output .= '<a href="chat.php?user_id='.$row['unique_id'].'">
                 <div class="content">
                     <img src="php/images/' . $row['img'] . '" alt="">
                     <div class="details">
                         <span>' . $row['fname'] . " " . $row['lname'] . '</span>
-                        <p>'. $msg .' </p>
+                        <p>'. $you .''. $msg .' </p>
                     </div>
                 </div>
-                <div class="status-dot"><i class="fas fa-circle"></i></div>
+                <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
                 </a>';
 }
 

@@ -13,13 +13,22 @@ sendBtn.onclick = ()=>{
     xhr.onload = ()=>{
         if(xhr.readyState === XMLHttpRequest.DONE) {
             if(xhr.status === 200) {
-                inputField.value = ""; //once message inserted into database then leave input blank for next message 
+                inputField.value = ""; //once message inserted into database then leave input blank for next message
+                scrollToBottom();
             }
         }
     }
     //Now we send the form data through ajax to php
     let formData = new FormData(form); //create new FormData object
     xhr.send(formData); //sending form data to php
+}
+
+chatBox.onmouseleave = ()=>{
+    chatBox.classList.add("active")
+}
+
+chatBox.onmouseenter = ()=>{
+    chatBox.classList.remove("active")
 }
 
 setInterval(()=>{
@@ -30,9 +39,16 @@ setInterval(()=>{
             if(xhr.status === 200) {
                 let data = xhr.response;
                 chatBox.innerHTML = data;
+                if(!chatBox.classList.contains("active")) {
+                    scrollToBottom();
+                }
             }
         }
     }
     let formData = new FormData(form); //create new FormData object
     xhr.send(formData); //sending form data to php
 }, 500);
+
+function scrollToBottom() {
+    chatBox.scrollTop = chatBox.scrollHeight;
+}

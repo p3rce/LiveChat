@@ -12,17 +12,12 @@ if(!empty($email) && !empty($password)) {
     if(mysqli_num_rows($sql) > 0) {
 
         $row = mysqli_fetch_assoc($sql);
+        //User is all good
+        $_SESSION['unique_id'] = $row['unique_id'];
+        $status = "Active now";
+        $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
 
-        //Check if the user is banned
-        $isUserBanned = $row['banned'];
-
-        if($isUserBanned == "YES") {
-            //The user is banned
-            echo "You have been banned for violating our TOS!";
-
-        } else {
-            //User is all good
-            $_SESSION['unique_id'] = $row['unique_id'];
+        if($sql2) {
             echo "success";
         }
     } else {
