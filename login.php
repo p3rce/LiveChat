@@ -13,7 +13,7 @@ if(isset($_SESSION['unique_id'])) {
                 <p>Chat live with others now!</p>
             </div>
             
-            <form action="#" method="POST">
+            <form action="" method="POST">
                 <div class="error-txt"></div>
                     <div class="field input">
                         <label>Email Address</label>
